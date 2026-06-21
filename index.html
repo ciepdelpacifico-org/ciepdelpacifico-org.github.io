@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIÉP del Pacífico — Proyectos para nuestro territorio</title>
+<meta name="description" content="CIÉP del Pacífico acompaña a las comunidades del Pacífico y el Caribe chocoano a convertir sus ideas en proyectos con financiación.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A2634;
+    --ink-soft:#3C5A66;
+    --forest:#1E483C;
+    --sea:#2E6B5E;
+    --sand:#E0A857;
+    --sand-deep:#C98C36;
+    --paper:#FBF7EF;
+    --paper-alt:#F1EAD9;
+    --white:#FFFFFF;
+    --line:rgba(10,38,52,0.12);
+    --radius:18px;
+    --maxw:1180px;
+    --shadow:0 18px 40px -22px rgba(10,38,52,0.35);
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    font-family:"Lexend",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img{max-width:100%; display:block;}
+
+  .skip-link{
+    position:absolute; left:-999px; top:0; background:var(--sand); color:var(--ink);
+    padding:12px 18px; z-index:100; border-radius:0 0 10px 0; font-weight:600;
+  }
+  .skip-link:focus{left:0;}
+
+  a{color:inherit;}
+  :focus-visible{outline:3px solid var(--sand); outline-offset:3px;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+
+  h1,h2,h3{font-weight:800; margin:0; letter-spacing:-0.01em;}
+  p{margin:0;}
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--sea);
+  }
+  .eyebrow::before{content:""; width:18px; height:2px; background:var(--sand); display:inline-block; border-radius:2px;}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,247,239,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:12px; padding-bottom:12px; gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .brand img{width:38px; height:38px; border-radius:8px;}
+  .brand-text{font-weight:800; font-size:16px; line-height:1.1; color:var(--ink);}
+  .brand-text span{display:block; font-weight:500; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--sea);}
+  .nav-link{
+    display:inline-block; text-decoration:none; font-weight:700; font-size:15px;
+    padding:10px 18px; border-radius:999px; background:var(--ink); color:var(--white);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    background:linear-gradient(160deg, var(--ink) 0%, #122E3C 38%, var(--forest) 100%);
+    color:var(--white);
+    padding:64px 0 0;
+  }
+  .hero .wrap{
+    position:relative; z-index:2; padding-top:24px; padding-bottom:96px;
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;
+  }
+  .hero-illus .img-slot{border-color:rgba(255,255,255,0.55); color:#DCEAE5; background:rgba(255,255,255,0.06);}
+  .hero-eyebrow{color:#9FD6C2;}
+  .hero-eyebrow::before{background:var(--sand);}
+  .hero h1{
+    font-size:clamp(32px, 6vw, 56px);
+    line-height:1.08;
+    margin-top:18px;
+    max-width:14ch;
+  }
+  .hero p.lead{
+    margin-top:22px; max-width:46ch;
+    font-size:clamp(17px,2.4vw,20px);
+    color:#DCEAE5; font-weight:400;
+  }
+  .hero-actions{display:flex; flex-wrap:wrap; gap:14px; margin-top:34px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 26px; border-radius:999px; font-weight:700; font-size:16px;
+    text-decoration:none; border:2px solid transparent; cursor:pointer;
+    min-height:48px;
+  }
+  .btn-sand{background:var(--sand); color:var(--ink);}
+  .btn-sand:hover{background:var(--sand-deep);}
+  .btn-outline{border-color:rgba(255,255,255,0.55); color:var(--white);}
+  .btn-outline:hover{background:rgba(255,255,255,0.12);}
+  .btn-dark{background:var(--ink); color:var(--white);}
+  .btn-dark:hover{background:#0E3041;}
+
+  .hero-wave{position:absolute; inset:0; z-index:1; opacity:0.5; pointer-events:none;}
+
+  .wave-divider{display:block; width:100%; line-height:0; margin-top:-2px;}
+  .wave-divider svg{width:100%; height:auto; display:block;}
+
+  /* ---------- SECTION SHELLS ---------- */
+  section{padding:76px 0;}
+  .section-head{max-width:62ch; margin-bottom:44px;}
+  .section-head h2{font-size:clamp(26px,4vw,38px); margin-top:14px; line-height:1.15;}
+  .section-head p{margin-top:14px; font-size:18px; color:var(--ink-soft); max-width:56ch;}
+  .alt{background:var(--paper-alt);}
+
+  /* ---------- QUE ES ---------- */
+  .quees-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:36px; align-items:start;}
+  .quees-grid p.body-text{font-size:18px; color:var(--ink-soft);}
+  .trust-card{
+    background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px; box-shadow:var(--shadow);
+  }
+  .trust-card .icon{width:46px; height:46px; color:var(--sea); margin-bottom:14px;}
+  .trust-card h3{font-size:18px; margin-bottom:10px;}
+  .trust-card p{font-size:16px; color:var(--ink-soft);}
+
+  /* ---------- TERRITORIO ---------- */
+  .terr-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  .terr-card{
+    background:var(--white); border-radius:var(--radius); padding:28px;
+    border:1px solid var(--line);
+  }
+  .terr-card h3{font-size:19px; display:flex; align-items:center; gap:10px; margin-bottom:18px;}
+  .terr-card h3 .icon{width:26px; height:26px; color:var(--sea); flex:none;}
+  .pill-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .pill{
+    background:var(--paper-alt); border-radius:999px; padding:8px 16px; font-size:15px; font-weight:600;
+  }
+  .pill.pac{background:#E6F1ED; color:var(--forest);}
+  .pill.car{background:#EAF1F6; color:#1B4A63;}
+  .who-list{list-style:none; margin:0; padding:0; display:grid; gap:16px;}
+  .who-list li{display:flex; gap:14px; align-items:flex-start;}
+  .who-list .icon{width:28px; height:28px; color:var(--sand-deep); flex:none; margin-top:2px;}
+  .who-list strong{display:block; font-size:16px;}
+  .who-list span{font-size:15px; color:var(--ink-soft);}
+
+  /* ---------- PASOS (signature sequence) ---------- */
+  .pasos{position:relative;}
+  .pasos-list{list-style:none; margin:0; padding:0; position:relative;}
+  .pasos-list::before{
+    content:""; position:absolute; left:27px; top:14px; bottom:14px; width:3px;
+    background:repeating-linear-gradient(180deg, var(--sea) 0 10px, transparent 10px 18px);
+    border-radius:3px;
+  }
+  .paso{display:grid; grid-template-columns:56px 1fr; gap:22px; padding-bottom:38px; position:relative;}
+  .paso:last-child{padding-bottom:0;}
+  .paso-num{
+    width:56px; height:56px; border-radius:50%; background:var(--ink); color:var(--white);
+    display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:800;
+    position:relative; z-index:2; flex:none;
+  }
+  .paso:nth-child(even) .paso-num{background:var(--forest);}
+  .paso-body{padding-top:6px;}
+  .paso-body h3{font-size:19px; margin-bottom:8px;}
+  .paso-body p{font-size:16px; color:var(--ink-soft); max-width:58ch;}
+
+  /* ---------- EQUIPOS ---------- */
+  .equipos-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .equipo-card{
+    background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px; display:flex; flex-direction:column; gap:12px;
+  }
+  .equipo-card .icon{width:34px; height:34px; color:var(--sea);}
+  .equipo-card h3{font-size:16.5px; line-height:1.25;}
+  .equipo-card p{font-size:14.5px; color:var(--ink-soft);}
+  .consenso-banner{
+    margin-top:32px; display:flex; gap:16px; align-items:center;
+    background:var(--ink); color:var(--white); border-radius:var(--radius);
+    padding:24px 28px;
+  }
+  .consenso-banner .icon{width:32px; height:32px; color:var(--sand); flex:none;}
+  .consenso-banner p{font-size:16px; font-weight:500;}
+
+  /* ---------- CONTACTO ---------- */
+  .contacto{
+    background:linear-gradient(160deg, var(--forest) 0%, var(--ink) 100%);
+    color:var(--white);
+  }
+  .contacto .wrap{display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;}
+  .contacto .section-head p{color:#DCEAE5;}
+  .contacto .eyebrow{color:#9FD6C2;}
+  .contacto-actions{display:flex; flex-wrap:wrap; gap:16px; margin-top:8px;}
+  .contact-note{margin-top:22px; font-size:14.5px; color:#BBD3CB;}
+  .contacto-illus .img-slot{border-color:rgba(255,255,255,0.55); color:#DCEAE5; background:rgba(255,255,255,0.06);}
+
+  /* ---------- FORMULARIO DE CONTACTO ---------- */
+  .full-span{grid-column:1 / -1;}
+  .form-card{
+    background:var(--white); color:var(--ink); border-radius:var(--radius);
+    padding:32px; margin-top:48px; box-shadow:var(--shadow);
+  }
+  .form-card h3{font-size:clamp(20px,2.6vw,24px); margin-bottom:8px;}
+  .form-card > p.form-intro{color:var(--ink-soft); font-size:15.5px; margin-bottom:28px; max-width:60ch;}
+  .field{margin-bottom:20px;}
+  .field label{display:block; font-weight:700; font-size:15px; margin-bottom:6px;}
+  .field .hint{display:block; font-weight:400; font-size:13px; color:var(--ink-soft); margin-top:5px;}
+  .required-mark{color:#B23A3A;}
+  .field input[type="text"], .field input[type="tel"], .field input[type="email"],
+  .field select, .field textarea{
+    width:100%; padding:13px 14px; border:1.6px solid var(--line); border-radius:12px;
+    font-family:inherit; font-size:16px; color:var(--ink); background:var(--paper);
+    min-height:48px;
+  }
+  .field textarea{min-height:120px; resize:vertical; line-height:1.5;}
+  .field input:focus, .field select:focus, .field textarea:focus{
+    border-color:var(--sea); outline:none; box-shadow:0 0 0 3px rgba(46,107,94,0.15);
+  }
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .radio-group{display:flex; flex-direction:column; gap:10px;}
+  .radio-option{
+    display:flex; align-items:center; gap:12px; padding:13px 16px;
+    border:1.6px solid var(--line); border-radius:12px; cursor:pointer; transition:border-color 0.2s ease, background 0.2s ease;
+  }
+  .radio-option input{width:19px; height:19px; flex:none; accent-color:var(--sea);}
+  .radio-option:has(input:checked){border-color:var(--sea); background:#EAF3F0;}
+  .radio-option span{font-size:15.5px; font-weight:500;}
+  .field-extra{margin-top:10px;}
+  .hp-field{position:absolute; left:-9999px; top:-9999px;}
+  .form-submit-row{display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:8px;}
+  .form-status{font-size:15px; font-weight:600;}
+  .form-status--ok{color:var(--forest);}
+  .form-status--err{color:#B23A3A;}
+  .consent-note{font-size:13px; color:var(--ink-soft); margin-top:18px; max-width:60ch;}
+  @media (max-width:560px){.form-row{grid-template-columns:1fr;}}
+
+  /* ---------- INSTITUCIONAL ---------- */
+  .inst-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; align-items:start;}
+  .inst-block{display:flex; flex-direction:column; gap:20px;}
+  .inst-card{background:var(--white); border:1px solid var(--line); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow);}
+  .inst-card h3{font-size:17px; color:var(--ink); margin-bottom:12px; display:flex; align-items:center; gap:10px; line-height:1.25;}
+  .inst-card h3 .icon{width:26px; height:26px; color:var(--sea); flex:none;}
+  .inst-card p{font-size:15.5px; color:var(--ink-soft); line-height:1.7;}
+  .inst-card ul{list-style:none; margin:0; padding:0; display:grid; gap:11px;}
+  .inst-card ul li{display:flex; gap:11px; align-items:flex-start; font-size:15px; color:var(--ink-soft); line-height:1.5;}
+  .inst-card ul li strong{display:block; color:var(--ink); font-size:14.5px;}
+  .inst-card ul li::before{content:""; width:8px; height:8px; min-width:8px; border-radius:50%; background:var(--sand); margin-top:6px;}
+  .legal-strip{
+    margin-top:32px; display:grid; grid-template-columns:repeat(3,1fr);
+    gap:1px; background:var(--line); border-radius:var(--radius); overflow:hidden;
+  }
+  .legal-item{background:var(--white); padding:18px 22px;}
+  .legal-item dt{font-size:11.5px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--sea); margin-bottom:4px;}
+  .legal-item dd{font-size:15px; font-weight:600; color:var(--ink); margin:0; line-height:1.4;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink); color:#CBD9DE; padding:48px 0 28px;}
+  .foot-top{display:flex; flex-wrap:wrap; justify-content:space-between; gap:28px; padding-bottom:28px; border-bottom:1px solid rgba(255,255,255,0.12);}
+  .foot-brand{display:flex; gap:12px; align-items:center;}
+  .foot-brand img{width:40px; height:40px; border-radius:8px;}
+  .foot-brand strong{display:block; color:var(--white); font-size:16px;}
+  .foot-brand span{font-size:13px; color:#9FB5BD;}
+  .foot-muni{font-size:14px; max-width:38ch; color:#9FB5BD;}
+  .foot-bottom{padding-top:20px; font-size:13px; color:#7E96A0; display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between;}
+
+  /* ---------- reveal animation ---------- */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  /* stagger children inside a grid: add data-stagger to the parent */
+  [data-stagger] > .reveal:nth-child(1){transition-delay:0s;}
+  [data-stagger] > .reveal:nth-child(2){transition-delay:0.08s;}
+  [data-stagger] > .reveal:nth-child(3){transition-delay:0.16s;}
+  [data-stagger] > .reveal:nth-child(4){transition-delay:0.24s;}
+  [data-stagger] > .reveal:nth-child(5){transition-delay:0.32s;}
+  [data-stagger] > .reveal:nth-child(6){transition-delay:0.40s;}
+
+  /* ---------- IMAGE SLOTS (placeholders for Google Flow illustrations) ---------- */
+  /* Replace each .img-slot with: <img src="/assets/img/NAME.png" alt="..." class="illus illus--ratioX"> */
+  .img-slot{
+    border:2px dashed var(--sea); border-radius:var(--radius);
+    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px;
+    color:var(--sea); font-size:13px; font-weight:600; text-align:center; padding:20px;
+    background:repeating-linear-gradient(135deg, rgba(46,107,94,0.06) 0 10px, transparent 10px 20px);
+  }
+  .img-slot small{font-weight:500; opacity:0.75; font-size:11.5px;}
+  .img-slot--wide{aspect-ratio:16/10; width:100%;}
+  .img-slot--square{aspect-ratio:1/1; width:100%; max-width:420px;}
+  .img-slot--tall{aspect-ratio:4/5; width:100%;}
+  .illus{display:block; width:100%; border-radius:var(--radius); object-fit:cover;}
+  .illus--wide{aspect-ratio:16/10;}
+  .illus--square{aspect-ratio:1/1; max-width:420px;}
+
+  /* ---------- motion utilities ---------- */
+  .float{animation:floatY 4.5s ease-in-out infinite;}
+  @keyframes floatY{0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);}}
+
+  .pulse-dot{position:relative;}
+  .pulse-dot::after{
+    content:""; position:absolute; inset:0; border-radius:999px;
+    box-shadow:0 0 0 0 rgba(224,168,87,0.55);
+    animation:pulseRing 2.4s ease-out infinite;
+  }
+  @keyframes pulseRing{
+    0%{box-shadow:0 0 0 0 rgba(224,168,87,0.55);}
+    80%{box-shadow:0 0 0 18px rgba(224,168,87,0);}
+    100%{box-shadow:0 0 0 0 rgba(224,168,87,0);}
+  }
+
+  .tilt-hover{transition:transform 0.35s ease;}
+  .tilt-hover:hover{transform:rotate(-1.5deg) scale(1.03);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:880px){
+    .hero .wrap{grid-template-columns:1fr; gap:28px;}
+    .hero-illus{order:-1; max-width:280px; margin:0 auto;}
+    .contacto .wrap{grid-template-columns:1fr; gap:28px;}
+    .contacto-illus{order:-1; max-width:280px; margin:0 auto;}
+    .inst-grid{grid-template-columns:repeat(2,1fr);}
+    .legal-strip{grid-template-columns:1fr 1fr;}
+    .quees-grid{grid-template-columns:1fr;}
+    .terr-grid{grid-template-columns:1fr;}
+    .equipos-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:560px){
+    .equipos-grid{grid-template-columns:1fr;}
+    .inst-grid{grid-template-columns:1fr;}
+    .legal-strip{grid-template-columns:1fr;}
+    .nav-link{padding:9px 14px; font-size:14px;}
+    .brand-text{font-size:14px;}
+    section{padding:56px 0;}
+    .paso{grid-template-columns:46px 1fr; gap:16px;}
+    .paso-num{width:46px; height:46px; font-size:18px;}
+    .pasos-list::before{left:22px;}
+  }
+</style>
+</head>
+<body>
+
+<a href="#contenido" class="skip-link">Ir al contenido</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#inicio" class="brand">
+      <img src="data:image/jpeg;base64,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" alt="Logo de CIÉP del Pacífico">
+      <span class="brand-text">CIÉP del Pacífico<span>Pacífico y Caribe chocoano</span></span>
+    </a>
+    <a href="#contacto" class="nav-link">Escríbenos</a>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <svg class="hero-wave" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M-50,420 C150,360 300,480 500,420 C700,360 850,460 1050,400 C1150,370 1200,390 1250,380"
+            fill="none" stroke="#9FD6C2" stroke-width="2" opacity="0.35"/>
+      <path d="M-50,480 C180,520 320,400 520,460 C720,520 860,420 1080,470 C1180,495 1220,480 1260,470"
+            fill="none" stroke="#E0A857" stroke-width="2" opacity="0.3"/>
+      <path d="M-50,360 C200,300 340,400 540,350 C740,300 900,380 1100,330 C1180,310 1220,320 1260,310"
+            fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.15"/>
+    </svg>
+    <div class="wrap">
+      <div class="hero-text">
+        <p class="eyebrow hero-eyebrow">CIÉP del Pacífico</p>
+        <h1>Las ideas de nuestro territorio, convertidas en proyectos reales.</h1>
+        <p class="lead">Acompañamos a las comunidades del Pacífico y el Caribe chocoano a conseguir recursos del Estado para sus proyectos.</p>
+        <div class="hero-actions">
+          <a href="#como-ayudamos" class="btn btn-sand">Ver cómo trabajamos</a>
+          <a href="#contacto" class="btn btn-outline pulse-dot">Escríbenos</a>
+        </div>
+      </div>
+      <div class="hero-illus float">
+        <img src="imagenes/People_looking_at_ocean_202606211318.jpeg"
+             alt="Líder comunitario, joven mujer y bióloga marina en un muelle del Pacífico"
+             class="illus illus--square">
+      </div>
+    </div>
+    <div class="wave-divider">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,45 L1440,90 L0,90 Z" fill="#FBF7EF"/></svg>
+    </div>
+  </section>
+
+  <!-- QUE ES -->
+  <section id="que-es">
+    <div class="wrap">
+      <div class="quees-grid">
+        <div class="reveal">
+          <p class="eyebrow">¿Qué es CIÉP del Pacífico?</p>
+          <h2 style="margin-top:14px; font-size:clamp(24px,3.6vw,32px); line-height:1.2;">Profesionales del territorio, al servicio del territorio.</h2>
+          <p class="body-text" style="margin-top:18px;">Somos un grupo de profesionales — biólogos marinos, arquitectos, abogados, ingenieros y agrónomos — que trabaja al lado de las comunidades del Pacífico y el Caribe chocoano.</p>
+          <p class="body-text" style="margin-top:14px;">Conocemos el formato técnico que pide el Gobierno para entregar recursos, y lo usamos para que las ideas de la comunidad se conviertan en proyectos con financiación.</p>
+        </div>
+        <div class="trust-card reveal">
+          <img src="imagenes/Professionals_sitting_in_circle_…_202606211320.jpeg"
+               alt="Cinco profesionales interdisciplinarios del equipo CIÉP conversando bajo un árbol"
+               class="illus illus--wide" style="margin-bottom:18px;">
+          <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6 L40 13 V23 C40 33 33 40 24 43 C15 40 8 33 8 23 V13 Z"/><path d="M17 24 L22 29 L32 18"/></svg>
+          <h3>Nuestro compromiso</h3>
+          <p>El proyecto siempre es de la comunidad. Nosotros ponemos el conocimiento técnico para que se haga realidad — no decidimos por ustedes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERRITORIO -->
+  <section class="alt" id="territorio">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">¿A quién acompañamos?</p>
+        <h2>Trabajamos en los municipios costeros del Pacífico y el Caribe chocoano.</h2>
+      </div>
+      <img src="imagenes/Man_and_woman_standing_202606211325.jpeg"
+           alt="Vista estilizada del litoral chocoano con manglar, palafitos y botes"
+           class="illus illus--wide reveal" style="margin-bottom:28px; max-height:340px; object-position:top;">
+      <div class="terr-grid">
+        <div class="terr-card reveal">
+          <h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg> Nuestro territorio</h3>
+          <p style="font-size:14px; color:var(--ink-soft); margin-bottom:14px;">Costa Pacífica</p>
+          <div class="pill-row" style="margin-bottom:18px;">
+            <span class="pill pac">Bahía Solano</span>
+            <span class="pill pac">Nuquí</span>
+            <span class="pill pac">Juradó</span>
+            <span class="pill pac">Pizarro</span>
+          </div>
+          <p style="font-size:14px; color:var(--ink-soft); margin-bottom:14px;">Caribe chocoano</p>
+          <div class="pill-row">
+            <span class="pill car">Acandí</span>
+            <span class="pill car">Unguía</span>
+          </div>
+        </div>
+        <div class="terr-card reveal">
+          <h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M14.5 14.3c2.6.4 4.5 2.6 4.5 5.7"/></svg> A quién acompañamos</h3>
+          <ul class="who-list">
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-7h6v7"/></svg>
+              <span><strong>Consejos Comunitarios</strong><span>Las autoridades que organizan y representan al territorio.</span></span>
+            </li>
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 7 7 10 7 13a5 5 0 0 0 10 0c0-3-2-6-5-11Z"/></svg>
+              <span><strong>Comunidades afrodescendientes</strong><span>Familias y veredas que viven del mar, el río y la tierra.</span></span>
+            </li>
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l7-5 7 5M5 8v8l7 5 7-5V8"/></svg>
+              <span><strong>Resguardos indígenas</strong><span>Territorios y autoridades propias de los pueblos indígenas.</span></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO AYUDAMOS -->
+  <section class="pasos" id="como-ayudamos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">¿Cómo te ayudamos?</p>
+        <h2>De la idea de la comunidad, al proyecto financiado.</h2>
+        <p>Así se ve el camino, paso a paso.</p>
+      </div>
+      <ol class="pasos-list">
+        <li class="paso reveal">
+          <div class="paso-num">1</div>
+          <div class="paso-body"><h3>Nos cuentan la idea</h3><p>Conversamos con la comunidad o el Consejo Comunitario sobre la necesidad o la idea de proyecto.</p></div>
+        </li>
+        <li class="paso reveal">
+          <div class="paso-num">2</div>
+          <div class="paso-body"><h3>La organizamos</h3><p>Convertimos la idea en un proyecto técnico, con el formato que exige el Estado (se llama MGA).</p></div>
+        </li>
+        <li class="paso reveal">
+          <div class="paso-num">3</div>
+          <div class="paso-body"><h3>La presentamos</h3><p>Radicamos el proyecto ante quien puede financiarlo: ministerios, alcaldías o cooperación internacional.</p></div>
+        </li>
+        <li class="paso reveal">
+          <div class="paso-num">4</div>
+          <div class="paso-body"><h3>Acompañamos la ejecución</h3><p>Seguimos al lado de la comunidad mientras el proyecto se hace realidad, para que el conocimiento se quede en el territorio.</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- EQUIPOS -->
+  <section class="alt" id="equipos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">¿Cómo estamos organizados?</p>
+        <h2>Seis equipos, un mismo propósito.</h2>
+      </div>
+      <img src="imagenes/Characters_in_coastal_community_…_202606211330.jpeg"
+           alt="Seis personajes representando los roles del equipo CIÉP: bióloga, guía, arquitecto, líder, técnico y agricultora"
+           class="illus illus--wide reveal" style="margin-bottom:28px; max-height:300px;">
+      <div class="equipos-grid" data-stagger>
+        <div class="equipo-card reveal tilt-hover">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16c3 2 6 2 9 0s6-2 9 0"/><path d="M2 11c3 2 6 2 9 0s6-2 9 0"/><path d="M9 4c1.5 1.5 1.5 4 0 5.5"/></svg>
+          <h3>Mar, pesca y biodiversidad</h3>
+          <p>Cuidamos el mar, los manglares y la pesca artesanal.</p>
+        </div>
+        <div class="equipo-card reveal tilt-hover">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>
+          <h3>Turismo y cultura</h3>
+          <p>Formulamos proyectos de turismo comunitario y rescate cultural.</p>
+        </div>
+        <div class="equipo-card reveal tilt-hover">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><path d="M9 21v-6h6v6"/></svg>
+          <h3>Infraestructura y territorio</h3>
+          <p>Diseñamos obras que respetan la forma de vivir de la comunidad.</p>
+        </div>
+        <div class="equipo-card reveal tilt-hover">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 5-5 2 2-5 5-2Z"/></svg>
+          <h3>Caribe chocoano</h3>
+          <p>Acompañamos directamente a Acandí y Unguía.</p>
+        </div>
+        <div class="equipo-card reveal tilt-hover">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>
+          <h3>Energía limpia</h3>
+          <p>Llevamos soluciones de energía solar a comunidades aisladas.</p>
+        </div>
+        <div class="equipo-card reveal tilt-hover">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5-3 5-7 5-7V8l-5-3-5 3v7s0 4 5 7Z"/><path d="M12 12v5"/></svg>
+          <h3>Agricultura y finanzas</h3>
+          <p>Hacemos que los proyectos productivos sean viables y sostenibles.</p>
+        </div>
+      </div>
+      <div class="consenso-banner reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 20c0-3 2.5-5 5-5s5 2 5 5"/><path d="M12 20c0-3 2.5-5 5-5s5 2 5 5"/></svg>
+        <p>Aquí nadie manda solo. Las decisiones importantes se toman entre todos, en consenso.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contacto" id="contacto">
+    <div class="wrap">
+      <div class="contacto-text">
+        <div class="section-head reveal">
+          <p class="eyebrow">Hablemos</p>
+          <h2>¿Tienes una idea para tu comunidad?</h2>
+          <p>Completa el formulario de abajo y cuéntanos qué necesita tu territorio. Responder no tiene costo.</p>
+        </div>
+        <div class="contacto-actions reveal">
+          <a href="#formulario" class="btn btn-sand pulse-dot">Ir al formulario</a>
+        </div>
+      </div>
+      <div class="contacto-illus float">
+        <img src="imagenes/People_talking_on_bench_202606211335.jpeg"
+             alt="Integrante de CIÉP y líder comunitario en conversación cálida junto al mar"
+             class="illus illus--square">
+      </div>
+
+      <div class="form-card full-span reveal" id="formulario">
+        <h3>Cuéntanos tu solicitud</h3>
+        <p class="form-intro">Este formulario es para voceros, representantes de Consejos Comunitarios o de Resguardos Indígenas interesados en que CIÉP los acompañe con un proyecto. Lo leemos todo y te contactamos.</p>
+
+        <form id="ciep-form" action="https://formspree.io/f/mpqgaewa" method="POST">
+
+          <div class="form-row">
+            <div class="field">
+              <label for="nombre_completo">Nombre completo <span class="required-mark">*</span></label>
+              <input type="text" id="nombre_completo" name="nombre_completo" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="telefono">Teléfono de contacto <span class="required-mark">*</span></label>
+              <input type="tel" id="telefono" name="telefono" required autocomplete="tel" placeholder="Ej: 300 123 4567">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" autocomplete="email">
+            <span class="hint">Opcional — solo si tienes uno y lo revisas seguido.</span>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="municipio">Municipio <span class="required-mark">*</span></label>
+              <select id="municipio" name="municipio" required>
+                <option value="" disabled selected>Selecciona uno</option>
+                <option value="Bahía Solano">Bahía Solano</option>
+                <option value="Nuquí">Nuquí</option>
+                <option value="Juradó">Juradó</option>
+                <option value="Pizarro">Pizarro</option>
+                <option value="Acandí">Acandí</option>
+                <option value="Unguía">Unguía</option>
+                <option value="Otro">Otro</option>
+              </select>
+              <div class="field-extra" id="otro-municipio-wrap" style="display:none;">
+                <input type="text" id="otro_municipio" name="otro_municipio" placeholder="Escribe el municipio">
+              </div>
+            </div>
+            <div class="field">
+              <label for="vereda">Vereda o lugar específico</label>
+              <input type="text" id="vereda" name="vereda_o_lugar" autocomplete="off">
+              <span class="hint">Opcional, si quieres ser más específico.</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>¿A quién representas? <span class="required-mark">*</span></label>
+            <div class="radio-group" role="radiogroup" aria-label="¿A quién representas?">
+              <label class="radio-option">
+                <input type="radio" name="tipo_representacion" value="Vocero(a) comunitario" required>
+                <span>Vocero(a) comunitario</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="tipo_representacion" value="Consejo Comunitario">
+                <span>Consejo Comunitario</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="tipo_representacion" value="Resguardo Indígena">
+                <span>Resguardo Indígena</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="tipo_representacion" value="Otro">
+                <span>Otro</span>
+              </label>
+            </div>
+            <div class="field-extra" id="otro-rep-wrap" style="display:none;">
+              <input type="text" id="otro_tipo_representacion" name="otro_tipo_representacion" placeholder="Cuéntanos cuál">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="nombre_organizacion">Nombre del Consejo Comunitario, Resguardo o comunidad que representas <span class="required-mark">*</span></label>
+            <input type="text" id="nombre_organizacion" name="nombre_organizacion" required>
+          </div>
+
+          <div class="field">
+            <label for="idea_proyecto">¿Qué idea o proyecto quieren desarrollar? <span class="required-mark">*</span></label>
+            <textarea id="idea_proyecto" name="idea_proyecto" required placeholder="Ej: Queremos un proyecto de pesca artesanal con cadena de frío para vender mejor lo que pescamos."></textarea>
+            <span class="hint">Cuéntanos con tus palabras, no hace falta lenguaje técnico.</span>
+          </div>
+
+          <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="hidden" name="_subject" value="Nuevo contacto — Página web CIÉP del Pacífico">
+
+          <div class="form-submit-row">
+            <button type="submit" class="btn btn-dark" id="form-submit-btn">Enviar solicitud</button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </div>
+
+          <p class="consent-note">Al enviar este formulario, aceptas que CIÉP del Pacífico te contacte por teléfono o correo electrónico para conversar sobre tu solicitud.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFORMACIÓN INSTITUCIONAL -->
+  <section class="alt" id="institucional">
+    <div class="wrap">
+
+      <div class="section-head reveal">
+        <p class="eyebrow">Información institucional</p>
+        <h2>Más sobre CIÉP del Pacífico</h2>
+        <p>Somos una corporación civil sin ánimo de lucro. Aquí encontrarás nuestra misión, visión, principios y datos de constitución para quienes quieran conocernos a fondo.</p>
+      </div>
+
+      <div class="inst-grid">
+
+        <div class="inst-card reveal">
+          <h3>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            Misión
+          </h3>
+          <p>Somos una corporación interdisciplinaria sin ánimo de lucro compuesta por profesionales idóneos y comprometidos, dedicados al asesoramiento, formulación, gestión y acompañamiento en la ejecución de proyectos de inversión para el fortalecimiento de las comunidades afrodescendientes e indígenas del Pacífico y Caribe chocoano.</p>
+          <p style="margin-top:12px;">Transformamos las necesidades del territorio en proyectos técnicamente viables y viabilizados ante el Estado, con una gobernanza interna horizontal, transparente y cooperativa.</p>
+        </div>
+
+        <div class="inst-card reveal">
+          <h3>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            Visión — 2031
+          </h3>
+          <p>Para el año 2031, la CIÉP del Pacífico será reconocida a nivel nacional como el principal referente técnico y el puente metodológico más eficiente entre los ministerios del Gobierno de Colombia, la cooperación internacional y los Consejos Comunitarios de la costa pacífica y Caribe chocoana, destacándose por su modelo democrático, su capacidad de co-administración de proyectos y su alto impacto en la ejecución sostenible de recursos públicos para comunidades étnicas.</p>
+        </div>
+
+        <div class="inst-card reveal">
+          <h3>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Objeto social
+          </h3>
+          <p>Estructurar, formular, gestionar, ejecutar, administrar y evaluar proyectos de inversión pública, privada y de cooperación internacional con enfoque interdisciplinario, étnico y sostenible; suscribir convenios de cooperación y co-administración con Consejos Comunitarios, Resguardos Indígenas y entes territoriales; y prestar servicios técnicos especializados de consultoría en los municipios costeros del Chocó.</p>
+        </div>
+
+      </div>
+
+      <!-- Datos legales -->
+      <dl class="legal-strip reveal">
+        <div class="legal-item">
+          <dt>Nombre legal</dt>
+          <dd>Corporación Interdisciplinaria Étnica del Pacífico</dd>
+        </div>
+        <div class="legal-item">
+          <dt>Sigla oficial</dt>
+          <dd>CIÉP del Pacífico</dd>
+        </div>
+        <div class="legal-item">
+          <dt>Naturaleza jurídica</dt>
+          <dd>Entidad Sin Ánimo de Lucro · Corporación Civil</dd>
+        </div>
+        <div class="legal-item">
+          <dt>Domicilio principal</dt>
+          <dd>Bahía Solano, Chocó, Colombia</dd>
+        </div>
+        <div class="legal-item">
+          <dt>Ámbito territorial</dt>
+          <dd>Costa Pacífica y Caribe chocoano</dd>
+        </div>
+        <div class="legal-item">
+          <dt>Estado</dt>
+          <dd>En proceso de constitución ante Cámara de Comercio de Quibdó</dd>
+        </div>
+      </dl>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="data:image/jpeg;base64,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" alt="Logo de CIÉP del Pacífico">
+        <div><strong>CIÉP del Pacífico</strong><span>Profesionales del territorio, trabajando para el territorio.</span></div>
+      </div>
+      <p class="foot-muni">Bahía Solano · Nuquí · Juradó · Pizarro · Acandí · Unguía — Chocó, Colombia.</p>
+    </div>
+    <div class="foot-bottom">
+      <span>Corporación Interdisciplinaria Étnica del Pacífico — en proceso de constitución.</span>
+      <span id="year"></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = '© ' + new Date().getFullYear() + ' CIÉP del Pacífico';
+
+  if ('IntersectionObserver' in window) {
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    els.forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+
+  /* Mostrar/ocultar el campo de texto cuando se elige "Otro" */
+  function bindOtroToggle(triggerSelector, wrapId, eventName){
+    const wrap = document.getElementById(wrapId);
+    if (!wrap) return;
+    const update = (el) => { wrap.style.display = (el.value === 'Otro') ? 'block' : 'none'; };
+    document.querySelectorAll(triggerSelector).forEach(el => {
+      el.addEventListener(eventName, () => update(el));
+      if (el.checked || el.tagName === 'SELECT') update(el);
+    });
+  }
+  bindOtroToggle('#municipio', 'otro-municipio-wrap', 'change');
+  bindOtroToggle('input[name="tipo_representacion"]', 'otro-rep-wrap', 'change');
+
+  /* Envío del formulario de contacto a Formspree, sin recargar la página */
+  const ciepForm = document.getElementById('ciep-form');
+  if (ciepForm) {
+    ciepForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const btn = document.getElementById('form-submit-btn');
+      const status = document.getElementById('form-status');
+      const formData = new FormData(ciepForm);
+
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+      status.textContent = '';
+      status.className = 'form-status';
+
+      try {
+        const response = await fetch(ciepForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          ciepForm.reset();
+          document.getElementById('otro-municipio-wrap').style.display = 'none';
+          document.getElementById('otro-rep-wrap').style.display = 'none';
+          status.textContent = '¡Gracias! Recibimos tu solicitud. Te contactaremos pronto.';
+          status.className = 'form-status form-status--ok';
+          btn.textContent = 'Enviado ✓';
+        } else {
+          const data = await response.json().catch(() => null);
+          const msg = (data && data.errors) ? data.errors.map(x => x.message).join(', ') : null;
+          status.textContent = msg || 'Hubo un problema al enviar. Intenta de nuevo o escríbenos a ciepdelpacifico@gmail.com';
+          status.className = 'form-status form-status--err';
+          btn.disabled = false;
+          btn.textContent = 'Enviar solicitud';
+        }
+      } catch (err) {
+        status.textContent = 'No se pudo enviar. Revisa tu conexión a internet o escríbenos a ciepdelpacifico@gmail.com';
+        status.className = 'form-status form-status--err';
+        btn.disabled = false;
+        btn.textContent = 'Enviar solicitud';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
