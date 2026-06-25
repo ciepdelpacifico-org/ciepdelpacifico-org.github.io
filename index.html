@@ -79,10 +79,13 @@
   .brand img{width:38px; height:38px; border-radius:8px;}
   .brand-text{font-weight:800; font-size:16px; line-height:1.1; color:var(--ink);}
   .brand-text span{display:block; font-weight:500; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--sea);}
+  .nav-links{display:flex; align-items:center; gap:12px;}
   .nav-link{
     display:inline-block; text-decoration:none; font-weight:700; font-size:15px;
     padding:10px 18px; border-radius:999px; background:var(--ink); color:var(--white);
   }
+  .nav-link--text{background:none; color:var(--ink); padding:10px 12px;}
+  .nav-link--text:hover{color:var(--sea);}
 
   /* ---------- HERO ---------- */
   .hero{
@@ -202,6 +205,123 @@
   }
   .consenso-banner .icon{width:32px; height:32px; color:var(--sand); flex:none;}
   .consenso-banner p{font-size:16px; font-weight:500;}
+
+  /* ---------- PROYECTOS PRODUCTIVOS ---------- */
+  .proyectos-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 420px)); gap:28px; justify-content:center;}
+  .proyecto-card{
+    background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden; box-shadow:var(--shadow); display:flex; flex-direction:column;
+    cursor:pointer; transition:transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .proyecto-card:hover{transform:rotate(-1deg) scale(1.03); box-shadow:0 24px 50px -18px rgba(10,38,52,0.4);}
+  .proyecto-card img{width:100%; height:220px; object-fit:cover;}
+  .proyecto-card-body{padding:24px 28px 28px; display:flex; flex-direction:column; gap:14px; flex:1;}
+  .proyecto-tag{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--sea); background:#E6F1ED; padding:5px 12px; border-radius:999px; width:fit-content;
+  }
+  .proyecto-card-body h3{font-size:20px; line-height:1.25; margin:0;}
+  .proyecto-card-body > p{font-size:15.5px; color:var(--ink-soft); line-height:1.6;}
+  .proyecto-stats{
+    display:flex; gap:1px; background:var(--line); border-radius:12px; overflow:hidden; margin-top:4px;
+  }
+  .proyecto-stat{
+    flex:1; background:var(--paper-alt); padding:14px 12px; text-align:center;
+  }
+  .proyecto-stat strong{display:block; font-size:20px; font-weight:800; color:var(--ink);}
+  .proyecto-stat span{font-size:11px; font-weight:600; color:var(--ink-soft); letter-spacing:0.03em;}
+  .proyecto-cta{margin-top:auto; padding-top:8px;}
+  .proyecto-card-cta{
+    display:flex; align-items:center; gap:8px; margin-top:auto; padding-top:8px;
+    font-size:15px; font-weight:700; color:var(--sea);
+  }
+  .proyecto-card-cta svg{transition:transform 0.3s ease;}
+  .proyecto-card:hover .proyecto-card-cta svg{transform:translateX(4px);}
+  @media (max-width:560px){
+    .proyectos-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- MODAL PROYECTO ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; z-index:100;
+    background:rgba(10,38,52,0.7); backdrop-filter:blur(4px);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; visibility:hidden; transition:opacity 0.35s ease, visibility 0.35s ease;
+    padding:24px;
+  }
+  .modal-overlay.active{opacity:1; visibility:visible;}
+  .modal{
+    background:var(--paper); border-radius:var(--radius);
+    max-width:720px; width:100%; max-height:90vh; overflow-y:auto;
+    box-shadow:0 32px 80px -20px rgba(10,38,52,0.5);
+    transform:translateY(30px) scale(0.97); transition:transform 0.35s ease;
+    position:relative;
+  }
+  .modal-overlay.active .modal{transform:translateY(0) scale(1);}
+  .modal-close{
+    position:absolute; top:16px; right:16px; z-index:3;
+    width:40px; height:40px; border-radius:50%; border:none;
+    background:rgba(255,255,255,0.9); backdrop-filter:blur(4px);
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+    font-size:20px; color:var(--ink); box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    transition:background 0.2s ease;
+  }
+  .modal-close:hover{background:var(--white);}
+  .modal-hero{position:relative;}
+  .modal-hero img{width:100%; height:280px; object-fit:cover; display:block;}
+  .modal-hero-overlay{
+    position:absolute; bottom:0; left:0; right:0;
+    background:linear-gradient(transparent, rgba(10,38,52,0.7));
+    padding:24px 32px; color:var(--white);
+  }
+  .modal-hero-overlay h2{font-size:clamp(22px,4vw,30px); line-height:1.15; margin:0;}
+  .modal-hero-overlay .proyecto-tag{background:rgba(255,255,255,0.2); color:var(--white); margin-bottom:10px;}
+  .modal-body{padding:32px;}
+  .modal-body p{font-size:16px; color:var(--ink-soft); line-height:1.7; margin-bottom:16px;}
+  .modal-body p:last-child{margin-bottom:0;}
+  .modal-stats{
+    display:flex; gap:1px; background:var(--line); border-radius:14px; overflow:hidden;
+    margin:28px 0;
+  }
+  .modal-stat{flex:1; background:var(--white); padding:20px 16px; text-align:center;}
+  .modal-stat strong{display:block; font-size:28px; font-weight:900; color:var(--ink);}
+  .modal-stat span{font-size:12px; font-weight:600; color:var(--ink-soft);}
+  .modal-process{margin:28px 0;}
+  .modal-process h3{font-size:18px; color:var(--ink); margin-bottom:18px; display:flex; align-items:center; gap:10px;}
+  .modal-steps{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+  .modal-step{
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    padding:18px 12px; text-align:center;
+  }
+  .modal-step .step-icon{font-size:28px; margin-bottom:8px;}
+  .modal-step strong{display:block; font-size:14px; color:var(--ink); margin-bottom:4px;}
+  .modal-step span{font-size:12px; color:var(--ink-soft);}
+  .modal-benefits{margin:28px 0;}
+  .modal-benefits h3{font-size:18px; color:var(--ink); margin-bottom:18px;}
+  .modal-benefits ul{list-style:none; margin:0; padding:0; display:grid; gap:12px;}
+  .modal-benefits li{
+    display:flex; gap:12px; align-items:flex-start;
+    font-size:15px; color:var(--ink-soft); line-height:1.5;
+  }
+  .modal-benefits li::before{
+    content:"✓"; flex:none; width:24px; height:24px; border-radius:6px;
+    background:var(--sand); color:var(--ink); font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; margin-top:1px;
+  }
+  .modal-benefits li strong{color:var(--ink);}
+  .modal-footer{
+    padding:24px 32px; border-top:1px solid var(--line);
+    display:flex; flex-wrap:wrap; align-items:center; gap:16px;
+  }
+  @media (max-width:560px){
+    .modal-steps{grid-template-columns:repeat(2,1fr);}
+    .modal-hero img{height:200px;}
+    .modal-body{padding:24px;}
+    .modal-footer{padding:20px 24px;}
+    .modal-stats .modal-stat{padding:14px 8px;}
+    .modal-stats .modal-stat strong{font-size:22px;}
+  }
 
   /* ---------- CONTACTO ---------- */
   .contacto{
@@ -365,7 +485,10 @@
       <img src="data:image/jpeg;base64,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" alt="Logo de CIÉP del Pacífico">
       <span class="brand-text">CIÉP del Pacífico<span>Pacífico y Caribe chocoano</span></span>
     </a>
-    <a href="#contacto" class="nav-link">Escríbenos</a>
+    <div class="nav-links">
+      <a href="#proyectos" class="nav-link nav-link--text">Proyectos</a>
+      <a href="#contacto" class="nav-link">Escríbenos</a>
+    </div>
   </div>
 </header>
 
@@ -545,6 +668,105 @@
       <div class="consenso-banner reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 20c0-3 2.5-5 5-5s5 2 5 5"/><path d="M12 20c0-3 2.5-5 5-5s5 2 5 5"/></svg>
         <p>Aquí nadie manda solo. Las decisiones importantes se toman entre todos, en consenso.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS PRODUCTIVOS -->
+  <section id="proyectos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Proyectos abiertos</p>
+        <h2>Proyectos productivos para tu comunidad</h2>
+        <p>CIÉP formula proyectos ante el Estado para que las comunidades puedan transformar sus recursos naturales en productos de alto valor. Conoce las convocatorias abiertas y únete.</p>
+      </div>
+
+      <div class="proyectos-grid">
+
+        <!-- Proyecto: Aceite de Coco -->
+        <div class="proyecto-card reveal" onclick="openModal('modal-aceite-coco')" role="button" tabindex="0" aria-label="Ver detalles del proyecto Aceite de Coco Virgen del Pacífico">
+          <img src="imagenes/Artisan_coconut_oil_production_p…_202606241946.jpeg"
+               alt="Producción artesanal de aceite de coco virgen en el Pacífico chocoano">
+          <div class="proyecto-card-body">
+            <span class="proyecto-tag">Ardita, Juradó · Chocó</span>
+            <h3>Aceite de Coco Virgen del Pacífico</h3>
+            <p>¿Tienes cocos en tu territorio? Únete a la red de producción de aceite de coco virgen artesanal y transforma tu cosecha en un producto de alto valor.</p>
+            <div class="proyecto-stats">
+              <div class="proyecto-stat">
+                <strong>3×</strong>
+                <span>más valor</span>
+              </div>
+              <div class="proyecto-stat">
+                <strong>100%</strong>
+                <span>artesanal</span>
+              </div>
+              <div class="proyecto-stat">
+                <strong>$0</strong>
+                <span>inversión</span>
+              </div>
+            </div>
+            <div class="proyecto-card-cta">
+              <span>Ver proyecto completo</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto: Langostino de Río -->
+        <div class="proyecto-card reveal" onclick="openModal('modal-langostino')" role="button" tabindex="0" aria-label="Ver detalles del proyecto Langostino de Río">
+          <img src="imagenes/Shrimp_farming_project_in_Colombia_202606242053.jpeg"
+               alt="Producción acuícola de langostino de río en Bahía Solano, Chocó">
+          <div class="proyecto-card-body">
+            <span class="proyecto-tag">Bahía Solano · Chocó</span>
+            <h3>Langostino de Río — Acuicultura Sostenible</h3>
+            <p>Producción bajo techo de langostino nativo del Pacífico. Proteína de alto valor para restaurantes, hoteles y turismo gastronómico de la región.</p>
+            <div class="proyecto-stats">
+              <div class="proyecto-stat">
+                <strong>$70k</strong>
+                <span>COP/kg</span>
+              </div>
+              <div class="proyecto-stat">
+                <strong>2</strong>
+                <span>ciclos/año</span>
+              </div>
+              <div class="proyecto-stat">
+                <strong>108m²</strong>
+                <span>bajo techo</span>
+              </div>
+            </div>
+            <div class="proyecto-card-cta">
+              <span>Ver proyecto completo</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!--
+        PLANTILLA — Para agregar un nuevo proyecto:
+        1. Copiar este bloque y descomentarlo
+        2. Cambiar el id del modal ('modal-NOMBRE') y el onclick
+        3. Cambiar imagen, textos y cifras
+        4. Crear el modal correspondiente abajo (copiar modal-aceite-coco)
+
+        <div class="proyecto-card reveal" onclick="openModal('modal-NOMBRE')" role="button" tabindex="0" aria-label="Ver detalles del proyecto">
+          <img src="imagenes/IMAGEN.jpeg" alt="Descripción">
+          <div class="proyecto-card-body">
+            <span class="proyecto-tag">Ubicación · Municipio</span>
+            <h3>Nombre del proyecto</h3>
+            <p>Descripción corta.</p>
+            <div class="proyecto-stats">
+              <div class="proyecto-stat"><strong>CIFRA</strong><span>etiqueta</span></div>
+              <div class="proyecto-stat"><strong>CIFRA</strong><span>etiqueta</span></div>
+              <div class="proyecto-stat"><strong>CIFRA</strong><span>etiqueta</span></div>
+            </div>
+            <div class="proyecto-card-cta">
+              <span>Ver proyecto completo</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </div>
+        -->
+
       </div>
     </div>
   </section>
@@ -735,6 +957,165 @@
     </div>
   </section>
 
+  <!-- MODAL: Aceite de Coco -->
+  <div class="modal-overlay" id="modal-aceite-coco" aria-hidden="true" role="dialog" aria-label="Proyecto Aceite de Coco Virgen del Pacífico">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">&times;</button>
+
+      <div class="modal-hero">
+        <img src="imagenes/Artisan_coconut_oil_production_p…_202606241946.jpeg"
+             alt="Producción artesanal de aceite de coco virgen en el Pacífico chocoano">
+        <div class="modal-hero-overlay">
+          <span class="proyecto-tag">Ardita, Juradó · Chocó</span>
+          <h2>Aceite de Coco Virgen del Pacífico</h2>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <p><strong>¿Tienes cocos en tu territorio?</strong> Únete a la red de producción de aceite de coco virgen del Pacífico chocoano y transforma tu cosecha en un producto de alto valor. Tú pones los cocos, CIÉP pone el conocimiento técnico y formula el proyecto ante el Estado para acceder a financiación.</p>
+
+        <p>Este es el primer proyecto productivo de CIÉP del Pacífico, pensado para las comunidades de la costa Pacífica y el Caribe chocoano que tienen palmas de coco en su territorio y quieren darle más valor a lo que producen.</p>
+
+        <div class="modal-stats">
+          <div class="modal-stat">
+            <strong>3×</strong>
+            <span>más valor que el coco crudo</span>
+          </div>
+          <div class="modal-stat">
+            <strong>100%</strong>
+            <span>proceso artesanal</span>
+          </div>
+          <div class="modal-stat">
+            <strong>$0</strong>
+            <span>inversión inicial</span>
+          </div>
+        </div>
+
+        <div class="modal-process">
+          <h3>El proceso — de coco a aceite</h3>
+          <div class="modal-steps">
+            <div class="modal-step">
+              <div class="step-icon">🥥</div>
+              <strong>Recolectar</strong>
+              <span>Cosecha del coco fresco</span>
+            </div>
+            <div class="modal-step">
+              <div class="step-icon">🥛</div>
+              <strong>Extraer</strong>
+              <span>Rallado y leche de coco</span>
+            </div>
+            <div class="modal-step">
+              <div class="step-icon">🫙</div>
+              <strong>Decantar</strong>
+              <span>Separar aceite natural</span>
+            </div>
+            <div class="modal-step">
+              <div class="step-icon">✨</div>
+              <strong>Filtrar</strong>
+              <span>Aceite virgen cristalino</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-benefits">
+          <h3>¿Por qué unirte a este proyecto?</h3>
+          <ul>
+            <li><strong>Sin inversión inicial</strong> — aportás tus cocos, nosotros el conocimiento técnico y la formulación del proyecto.</li>
+            <li><strong>CIÉP formula el proyecto ante el Estado</strong> para acceder a financiación del Fondo Emprender y otras fuentes.</li>
+            <li><strong>Clientes mayoristas</strong> — a mayor volumen de producción constante, mejores compradores para la comunidad.</li>
+            <li><strong>Producto con identidad territorial</strong> — el aceite de coco del Chocó tiene diferenciación y demanda real en el mercado.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a href="#contacto" class="btn btn-sand" onclick="closeModal()">Quiero participar</a>
+        <span style="font-size:14px; color:var(--ink-soft);">Te contactaremos para explicarte cómo funciona.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Langostino de Río -->
+  <div class="modal-overlay" id="modal-langostino" aria-hidden="true" role="dialog" aria-label="Proyecto Langostino de Río">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">&times;</button>
+
+      <div class="modal-hero">
+        <img src="imagenes/Shrimp_farming_project_in_Colombia_202606242053.jpeg"
+             alt="Producción acuícola de langostino de río en Bahía Solano">
+        <div class="modal-hero-overlay">
+          <span class="proyecto-tag">Bahía Solano · Chocó</span>
+          <h2>Langostino de Río — Acuicultura Sostenible</h2>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <p><strong>Producción bajo techo de langostino nativo del Pacífico colombiano.</strong> Este proyecto propone cultivar langostino de río (<em>Macrobrachium americanum</em>), una especie nativa de los ríos de Bahía Solano, en una bodega reacondicionada de 108 m² con sistema de recirculación de agua.</p>
+
+        <p>El langostino de río tiene alta demanda en restaurantes, hoteles y circuitos de turismo gastronómico de la región. La producción controlada bajo techo garantiza oferta todo el año, trazabilidad y un precio de venta superior a la pesca artesanal.</p>
+
+        <p>El proyecto se presenta ante el <strong>Fondo Emprender — Convocatoria 163 NARP</strong> para acceder a capital semilla que financie la adecuación, equipos e insumos del primer ciclo productivo.</p>
+
+        <div class="modal-stats">
+          <div class="modal-stat">
+            <strong>$70k</strong>
+            <span>COP/kg precio restaurantes</span>
+          </div>
+          <div class="modal-stat">
+            <strong>2</strong>
+            <span>ciclos de producción/año</span>
+          </div>
+          <div class="modal-stat">
+            <strong>108m²</strong>
+            <span>bodega bajo techo</span>
+          </div>
+        </div>
+
+        <div class="modal-process">
+          <h3>Ciclo productivo</h3>
+          <div class="modal-steps">
+            <div class="modal-step">
+              <div class="step-icon">🦐</div>
+              <strong>Reproducción</strong>
+              <span>Incubación 3–4 semanas</span>
+            </div>
+            <div class="modal-step">
+              <div class="step-icon">🔬</div>
+              <strong>Larvicultura</strong>
+              <span>25–35 días en agua salobre</span>
+            </div>
+            <div class="modal-step">
+              <div class="step-icon">💧</div>
+              <strong>Precría</strong>
+              <span>45–60 días en agua dulce</span>
+            </div>
+            <div class="modal-step">
+              <div class="step-icon">📦</div>
+              <strong>Cosecha</strong>
+              <span>Peso comercial 50–80 g</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-benefits">
+          <h3>¿Por qué este proyecto?</h3>
+          <ul>
+            <li><strong>Especie nativa del Pacífico</strong> — no se introduce ninguna especie foránea, se trabaja con lo que ya está en el territorio.</li>
+            <li><strong>Oferta todo el año</strong> — la producción bajo techo elimina la estacionalidad de la pesca artesanal.</li>
+            <li><strong>Demanda real</strong> — restaurantes y hoteles de Bahía Solano necesitan producto fresco constante para el turismo gastronómico.</li>
+            <li><strong>Empleo para la comunidad NARP</strong> — genera autoempleo y empleo directo en la comunidad afrocolombiana.</li>
+            <li><strong>Financiación por Fondo Emprender</strong> — el proyecto se formula para acceder a hasta 42 SMMLV en capital semilla.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a href="#contacto" class="btn btn-sand" onclick="closeModal()">Quiero saber más</a>
+        <span style="font-size:14px; color:var(--ink-soft);">Escríbenos y te contamos cómo participar.</span>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <footer>
@@ -823,6 +1204,39 @@
       }
     });
   }
+
+  /* Modal de proyectos */
+  function openModal(id) {
+    var overlay = document.getElementById(id);
+    if (!overlay) return;
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    var overlay = document.querySelector('.modal-overlay.active');
+    if (!overlay) return;
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.modal-overlay').forEach(function (overlay) {
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  document.querySelectorAll('.proyecto-card[role="button"]').forEach(function (card) {
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+    });
+  });
 </script>
 
 </body>
